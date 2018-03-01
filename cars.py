@@ -97,7 +97,16 @@ def read_problem_statement(problem):
 
 def earliest_start_solve(problem):
     problem = read_problem_statement(problem)
-    sorted_rides = sorted(problem.rides, key=operator.itemgetter('t_start'))
+    sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
+    vehicles = []
+    n_vehicles = problem.vehicles
+    for i, n in enumerate(sorted_rides):
+        vehicles.append(Vehicle(i))
+        n_vehicles -= 1
+        if n == 0:
+            break
+    return vehicles
+
 
 def solve(problem):
     pass
