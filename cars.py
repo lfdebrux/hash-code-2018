@@ -7,13 +7,14 @@ Self-driving cars!
 Example:
 
 >>> a_example = open('a_example.in', 'r')
->>> solve(a_example)
+>>> print(solve(a_example))
 1 0
 2 2 1
 
 >>> Ride((0, 0), (1, 3), 2, 9)
 Ride((0, 0), (1, 3), 2, 9)
 
+>>> a_example = open('a_example.in', 'r')
 >>> read_problem_statement(a_example)
 Problem(3, 4, 2, 3, 2, 10, [Ride((0, 0), (1, 3), 2, 9), Ride((1, 2), (1, 0), 0, 9), Ride((2, 0), (2, 2), 0, 9)])
 
@@ -58,10 +59,13 @@ class Ride:
 
 class Vehicle:
 
-    def __init__(self, rides):
-        self.time = 0
-        self.location = (0, 0)
-        self.rides = rides
+    def __init__(self, rides=None, *, time=0, location=(0,0)):
+        self.time = time
+        self.location = location
+        if rides:
+            self.rides = rides
+        else:
+            self.rides = []
 
     def print_rides(self):
         s = f'{len(self.rides)}'
@@ -70,7 +74,9 @@ class Vehicle:
         return s
 
     def sort_nearest(rides):
-        sorted(rides, key=self.distance_to_ride)
+        '''sort rides by the closest in space-time.
+        '''
+        return sorted(rides, key=self.distance_to_ride)
 
     def distance_to_ride(self, ride):
         return space_time_distance(self.location, self.time, ride.start, ride.t_start)
