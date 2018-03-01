@@ -87,3 +87,12 @@ def earliest_start_solve(problem):
 
 def solve(problem):
     pass
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Solve the Google Hash Code 2018 problem")
+    parser.add_argument('problem', type=argparse.FileType('r'))
+    args = parser.parse_args()
+
+    print(solve(args.problem))
