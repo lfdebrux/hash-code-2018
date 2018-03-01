@@ -99,3 +99,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print(solve(args.problem))
+
+def write_solution(vehicles):
+   #each row is a vehicle
+   #first column number of rides
+   #each subsequent column is the rides assigned in order of assignment
+   for vehicles:
+       solution.writeline(len(vehicle),vehicle)
