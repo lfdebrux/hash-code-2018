@@ -140,6 +140,7 @@ def aron_solve(problem):
     vehicles = []
     assigned_rides = []
     n_vehicles = problem.vehicles
+    #assign first ride to each vehicle
     for i, n in enumerate(sorted_rides):
         vehicles.append(Vehicle([i]))
         #ride id, [startx, starty, endx, endy, earlistart, latefinish], journey-length, actual finish
@@ -150,9 +151,11 @@ def aron_solve(problem):
         n_vehicles -= 1
         if n == 0:
             break
-    #in the order the vehicles finish re-assign them
+    #in the order that the vehicles finish with their current ride re-assign them
     while True:
+        #find next vehicle to finish
         next_available = vehicles
+        #assign closest achievable (vehicle can complete ride before latest finish of that ride) ride to vehicle
 
     return vehicles
 
