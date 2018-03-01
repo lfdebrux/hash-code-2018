@@ -73,15 +73,14 @@ class Vehicle:
             s += f' {r}'
         return s
 
-    def sort_nearest(rides):
-        '''sort rides by the closest in space-time.
-        '''
+    def sort_nearest(self, rides):
+        '''sort rides by the closest in space-time.'''
         return sorted(rides, key=self.distance_to_ride)
 
     def distance_to_ride(self, ride):
         return space_time_distance(self.location, self.time, ride.start, ride.t_start)
 
-    def add_ride(ride_number, ride):
+    def add_ride(self, ride_number, ride):
         self.rides.append(ride_number)
         t_to_start = manhattan_distance(self.location, ride.start)
         self.time += t_to_start
@@ -126,8 +125,10 @@ def earliest_start_solve(problem):
     sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
     vehicles = []
     n_vehicles = problem.vehicles
-    for i, n in enumerate(sorted_rides):
-        vehicles.append(Vehicle([i]))
+    for i, r in enumerate(sorted_rides):
+        v = Vehicle()
+        v.add_ride(i, r)
+        vehicles.append(v)
         n_vehicles -= 1
         if n_vehicles == 0:
             break
