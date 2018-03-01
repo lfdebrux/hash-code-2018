@@ -101,23 +101,20 @@ def earliest_start_solve(problem):
     vehicles = []
     n_vehicles = problem.vehicles
     for i, n in enumerate(sorted_rides):
-        vehicles.append(Vehicle(i))
+        vehicles.append(Vehicle([i]))
         n_vehicles -= 1
         if n == 0:
             break
-    return vehicles
-
+    return write_solution(vehicles)
 
 def solve(problem):
+    pass
 
 def write_solution(vehicles):
-   #each row is a vehicle
-   #first column number of rides
-   #each subsequent column is the rides assigned in order of assignment
-   for vehicles:
-       solution.writeline(len(vehicle),vehicle)    
-
-    pass
+    s = ''
+    for v in vehicles:
+        s += v.print_rides() + '\n'
+    return s
 
 if __name__ == '__main__':
     import argparse
@@ -127,5 +124,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print(solve(args.problem))
-
-
