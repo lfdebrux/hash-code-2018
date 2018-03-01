@@ -94,7 +94,21 @@ def write_solution(vehicles):
    for vehicles:
        solution.writeline(len(vehicle),vehicle)    
 
-    pass
+
+def customer_value(rides):
+    rides_value = []
+    for ride in rides:
+        rides_value.append(abs(ride[0]-ride[2])+abs(ride[1]-ride[3]))
+    return rides_value
+
+def ride_possible(rides):
+    rides_possible = []
+    for ride in rides:
+        if abs(ride[0]-ride[2])+abs(ride[1]-ride[3]) < ride[5]-ride[4]:
+            rides_possible.append[1]
+        else:
+            rides_possible.append[0]
+    return rides_possible
 
 if __name__ == '__main__':
     import argparse
