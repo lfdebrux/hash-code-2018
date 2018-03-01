@@ -92,10 +92,16 @@ class Vehicle:
         self.time += manhattan_distance(ride.start, ride.end)
 
     def ride_possible(self, ride):
-        if t_start < self.time:
+        # is the ride end time already passed?
+        if self.time > ride.t_end:
             return False
-        if self.time + manhattan_distance(ride.start, ride.end) > ride.t_end:
+        # is the car able to reach the ride start before the ride end time?
+        if self.time + manhattan_distance(self.location, ride.start) < ride.t_end:
             return False
+        # is the car able to reach the ride end before the ride end time?
+        if self.time + manhattan_distance(self.location, ride.start) + manhattan_distance(ride.start, ride.end) > ride.t_end:
+            return False
+        return True
 
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
