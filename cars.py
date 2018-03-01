@@ -23,6 +23,9 @@ This problem uses the Manhattan distance metric a lot
 2
 >>> manhattan_distance((0, 0), (2, 2))
 4
+
+>>> Vehicle([2, 1]).print_rides()
+'2 2 1'
 """
 
 import numpy as np
@@ -52,6 +55,17 @@ class Ride:
 
     def __repr__(self):
         return f'Ride({self.start}, {self.end}, {self.t_start}, {self.t_finish})'
+
+class Vehicle:
+
+    def __init__(self, rides):
+        self.rides = rides
+
+    def print_rides(self):
+        s = f'{len(self.rides)}'
+        for r in self.rides:
+            s += f' {r}'
+        return s
 
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
