@@ -81,6 +81,9 @@ class Vehicle:
     def distance_to_ride(self, ride):
         return space_time_distance(self.location, self.time, ride.start, ride.t_start)
 
+    def add_ride(ride_number):
+        self.rides.append(ride_number)
+
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
 
@@ -127,8 +130,6 @@ def earliest_start_solve(problem):
 def solve(problem, strategy=earliest_start_solve):
     problem = read_problem_statement(problem)
     vehicles = strategy(problem)
-    #identify highest value, possible to complete customers
-    #send out initial cars
     return write_solution(vehicles)
 
 def write_solution(vehicles):
