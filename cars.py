@@ -48,7 +48,8 @@ class Problem:
 
 class Ride:
 
-    def __init__(self, start, end, t_start, t_finish):
+    def __init__(self, index, start, end, t_start, t_finish):
+        self.index = index
         self.start = start
         self.end = end
         self.t_start = t_start
@@ -70,7 +71,7 @@ class Vehicle:
     def print_rides(self):
         s = f'{len(self.rides)}'
         for r in self.rides:
-            s += f' {r}'
+            s += f' {r.index}'
         return s
 
     def sort_nearest(self, rides):
@@ -80,8 +81,8 @@ class Vehicle:
     def distance_to_ride(self, ride):
         return space_time_distance(self.location, self.time, ride.start, ride.t_start)
 
-    def add_ride(self, ride_number, ride):
-        self.rides.append(ride_number)
+    def add_ride(self, ride):
+        self.rides.append(ride)
         t_to_start = manhattan_distance(self.location, ride.start)
         self.time += t_to_start
         self.location = ride.end
@@ -114,9 +115,9 @@ def read_problem_statement(problem):
     # f the latest finish (0≤f ≤T), (f ≥s+|x−a|+|y−b|)
     # note that f can be equal to T – this makes the latest finish equal to the end of the simulation
     rides = []
-    for n in range(N):
+    for index in range(N):
         a, b, x, y, s, f = map(int, problem.readline().split())
-        rides.append(Ride((a, b), (x, y), s, f))
+        rides.append(Ride(index, (a, b), (x, y), s, f))
 
     return Problem(R, C, F, B, T, rides)
 
