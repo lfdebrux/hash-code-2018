@@ -86,4 +86,7 @@ def earliest_start_solve(problem):
     sorted_rides = sorted(problem.rides, key=operator.itemgetter('t_start'))
 
 def solve(problem):
+
+    
+
     pass
