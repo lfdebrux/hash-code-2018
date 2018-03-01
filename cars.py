@@ -16,6 +16,13 @@ Ride((0, 0), (1, 3), 2, 9)
 
 >>> read_problem_statement(a_example)
 Problem(3, 4, 2, 3, 2, 10, [Ride((0, 0), (1, 3), 2, 9), Ride((1, 2), (1, 0), 0, 9), Ride((2, 0), (2, 2), 0, 9)])
+
+This problem uses the Manhattan distance metric a lot
+
+>>> manhattan_distance((0, 0), (2, 0))
+2
+>>> manhattan_distance((0, 0), (2, 2))
+4
 """
 
 import numpy as np
@@ -44,6 +51,9 @@ class Ride:
 
     def __repr__(self):
         return f'Ride({self.start}, {self.end}, {self.t_start}, {self.t_finish})'
+
+def manhattan_distance(a, b):
+    return abs(b[0]-a[0]) + abs(b[1]-a[1])
 
 def read_problem_statement(problem):
     # first line includes
