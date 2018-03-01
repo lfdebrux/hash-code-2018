@@ -113,10 +113,29 @@ def solve(problem, strategy=earliest_start_solve):
     return write_solution(vehicles)
 
 def write_solution(vehicles):
-    s = ''
-    for v in vehicles:
-        s += v.print_rides() + '\n'
-    return s
+   #each row is a vehicle
+   #first column number of rides
+   #each subsequent column is the rides assigned in order of assignment
+   for vehicles:
+       solution.writeline(len(vehicle),vehicle)    
+
+
+def customer_value(rides):
+    'lengt of the ride i.e. score, not using bonus as that is equal for all customers'
+    rides_value = []
+    for ride in rides:
+        rides_value.append(abs(ride[0]-ride[2])+abs(ride[1]-ride[3]))
+    return rides_value
+
+def ride_possible(rides):
+    'this founction tests if the ride is possible at all, i.e. lenght of the ride is less than assigned time slot'
+    rides_possible = []
+    for ride in rides:
+        if abs(ride[0]-ride[2])+abs(ride[1]-ride[3]) < ride[5]-ride[4]:
+            rides_possible.append[1]
+        else:
+            rides_possible.append[0]
+    return rides_possible
 
 if __name__ == '__main__':
     import argparse
