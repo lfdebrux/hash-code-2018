@@ -59,6 +59,8 @@ class Ride:
 class Vehicle:
 
     def __init__(self, rides):
+        self.time = 0
+        self.location = (0, 0)
         self.rides = rides
 
     def print_rides(self):
@@ -67,8 +69,17 @@ class Vehicle:
             s += f' {r}'
         return s
 
+    def sort_nearest(rides):
+        sorted(rides, key=self.distance_to_ride)
+
+    def distance_to_ride(self, ride):
+        return space_time_distance(self.location, self.time, ride.start, ride.t_start)
+
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
+
+def space_time_distance(a, t_a, b, t_b):
+    return manhattan_distance(a, b) + abs(t_a - t_b)
 
 def read_problem_statement(problem):
     # first line includes
