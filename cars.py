@@ -185,6 +185,10 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Solve the Google Hash Code 2018 problem")
     parser.add_argument('problem', type=argparse.FileType('r'))
+    parser.add_argument('--strategy', default="earliest_start_solve",
+                        help="the strategy function to use")
     args = parser.parse_args()
 
-    print(solve(args.problem))
+    strategy = globals()[args.strategy]
+
+    print(solve(args.problem, strategy=strategy))
