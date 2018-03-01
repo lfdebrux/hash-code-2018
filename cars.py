@@ -7,13 +7,14 @@ Self-driving cars!
 Example:
 
 >>> a_example = open('a_example.in', 'r')
->>> solve(a_example)
+>>> print(solve(a_example))
 1 0
 2 2 1
 
 >>> Ride((0, 0), (1, 3), 2, 9)
 Ride((0, 0), (1, 3), 2, 9)
 
+>>> a_example = open('a_example.in', 'r')
 >>> read_problem_statement(a_example)
 Problem(3, 4, 2, 3, 2, 10, [Ride((0, 0), (1, 3), 2, 9), Ride((1, 2), (1, 0), 0, 9), Ride((2, 0), (2, 2), 0, 9)])
 
@@ -58,10 +59,13 @@ class Ride:
 
 class Vehicle:
 
-    def __init__(self, rides):
-        self.time = 0
-        self.location = (0, 0)
-        self.rides = rides
+    def __init__(self, rides=None, *, time=0, location=(0,0)):
+        self.time = time
+        self.location = location
+        if rides:
+            self.rides = rides
+        else:
+            self.rides = []
 
     def print_rides(self):
         s = f'{len(self.rides)}'
@@ -70,10 +74,21 @@ class Vehicle:
         return s
 
     def sort_nearest(rides):
-        sorted(rides, key=self.distance_to_ride)
+        '''sort rides by the closest in space-time.
+        '''
+        return sorted(rides, key=self.distance_to_ride)
 
     def distance_to_ride(self, ride):
         return space_time_distance(self.location, self.time, ride.start, ride.t_start)
+
+    def add_ride(ride_number, ride):
+        self.rides.append(ride_number)
+        t_to_start = manhattan_distance(self.location, ride.start)
+        self.time += t_to_start
+        self.location = ride.end
+        if self.time < ride.t_start:
+            self.time = ride.t_start
+        self.time += manhattan_distance(ride.start, ride.end)
 
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
@@ -114,7 +129,7 @@ def earliest_start_solve(problem):
     for i, n in enumerate(sorted_rides):
         vehicles.append(Vehicle([i]))
         n_vehicles -= 1
-        if n == 0:
+        if n_vehicles == 0:
             break
     return vehicles
 
@@ -139,8 +154,6 @@ def aron_solve(problem):
 def solve(problem, strategy=earliest_start_solve):
     problem = read_problem_statement(problem)
     vehicles = strategy(problem)
-    #identify highest value, possible to complete customers
-    #send out initial cars
     return write_solution(vehicles)
 
 def write_solution(vehicles):
