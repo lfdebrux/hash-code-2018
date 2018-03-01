@@ -42,10 +42,9 @@ class Problem:
         self.bonus = bonus
         self.steps = steps
         self.rides = rides
-        self.indexedrides = rides
 
     def __repr__(self):
-        return f'Problem({self.rows}, {self.cols}, {self.vehicles}, {self.n_rides}, {self.bonus}, {self.steps}, {self.rides}, {self.indexedrides})'
+        return f'Problem({self.rows}, {self.cols}, {self.vehicles}, {self.n_rides}, {self.bonus}, {self.steps}, {self.rides})'
 
 class Ride:
 
@@ -145,13 +144,6 @@ def earliest_start_solve(problem):
 def aron_solve(problem):
     '''extension of earliest start solve'''
     sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
-    
-    ###DELETE this once indexedrides are available
-    indexedrides = []
-    for i in range(0,len(problem.rides-1)):
-        indexedrides.append(i,problem.rides[i])
-    ####
-
     vehicles = []
     assigned_rides = []
     n_vehicles = problem.vehicles
@@ -159,7 +151,7 @@ def aron_solve(problem):
     for i in range(0,problem.N): #itterate for each vehicle
         vehicles.append(sorted_rides[i])
         #ride id, [startx, starty, endx, endy, earlistart, latefinish], journey-length, actual finish
-        ride = problem.indexedrides[i]
+        ride = problem.rides[sorted_rides[i].index] #
         journey_length = abs(ride[0]-ride[2])+abs(ride[1]-ride[3])
         actual_start = 
         assigned_rides.append(i,ride,journey_length,)
