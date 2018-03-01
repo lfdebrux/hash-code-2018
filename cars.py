@@ -192,7 +192,6 @@ def customer_value(rides):
         rides_value.append(abs(ride[0]-ride[2])+abs(ride[1]-ride[3]))
     return rides_value
 
-<<<<<<< HEAD
 def ride_possible(rides, current_location, current_time):
     'this function tests if the ride is possible at all: (current time + time to reach start location + ride duration) < latest finish'
     rides_possible = []
@@ -206,8 +205,6 @@ def ride_possible(rides, current_location, current_time):
             rides_possible.append[0]
     return rides_possible
 
-=======
->>>>>>> bd7108c20e446012edf790148b2163a1f0534244
 if __name__ == '__main__':
     import argparse
 
