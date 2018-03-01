@@ -81,8 +81,14 @@ class Vehicle:
     def distance_to_ride(self, ride):
         return space_time_distance(self.location, self.time, ride.start, ride.t_start)
 
-    def add_ride(ride_number):
+    def add_ride(ride_number, ride):
         self.rides.append(ride_number)
+        t_to_start = manhattan_distance(self.location, ride.start)
+        self.time += t_to_start
+        self.location = ride.end
+        if self.time < ride.t_start:
+            self.time = ride.t_start
+        self.time += manhattan_distance(ride.start, ride.end)
 
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
@@ -123,7 +129,7 @@ def earliest_start_solve(problem):
     for i, n in enumerate(sorted_rides):
         vehicles.append(Vehicle([i]))
         n_vehicles -= 1
-        if n == 0:
+        if n_vehicles == 0:
             break
     return vehicles
 
