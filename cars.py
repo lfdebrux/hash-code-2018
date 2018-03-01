@@ -23,6 +23,9 @@ This problem uses the Manhattan distance metric a lot
 2
 >>> manhattan_distance((0, 0), (2, 2))
 4
+
+>>> Vehicle([2, 1]).print_rides()
+'2 2 1'
 """
 
 import numpy as np
@@ -52,6 +55,17 @@ class Ride:
 
     def __repr__(self):
         return f'Ride({self.start}, {self.end}, {self.t_start}, {self.t_finish})'
+
+class Vehicle:
+
+    def __init__(self, rides):
+        self.rides = rides
+
+    def print_rides(self):
+        s = f'{len(self.rides)}'
+        for r in self.rides:
+            s += f' {r}'
+        return s
 
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
@@ -83,9 +97,18 @@ def read_problem_statement(problem):
 
 def earliest_start_solve(problem):
     problem = read_problem_statement(problem)
-    sorted_rides = sorted(problem.rides, key=operator.itemgetter('t_start'))
+    sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
+    vehicles = []
+    n_vehicles = problem.vehicles
+    for i, n in enumerate(sorted_rides):
+        vehicles.append(Vehicle([i]))
+        n_vehicles -= 1
+        if n == 0:
+            break
+    return write_solution(vehicles)
 
 def solve(problem):
+    pass
 
 def write_solution(vehicles):
    #each row is a vehicle
@@ -96,12 +119,14 @@ def write_solution(vehicles):
 
 
 def customer_value(rides):
+    'lengt of the ride i.e. score, not using bonus as that is equal for all customers'
     rides_value = []
     for ride in rides:
         rides_value.append(abs(ride[0]-ride[2])+abs(ride[1]-ride[3]))
     return rides_value
 
 def ride_possible(rides):
+    'this founction tests if the ride is possible at all, i.e. lenght of the ride is less than assigned time slot'
     rides_possible = []
     for ride in rides:
         if abs(ride[0]-ride[2])+abs(ride[1]-ride[3]) < ride[5]-ride[4]:
@@ -118,5 +143,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print(solve(args.problem))
-
-
