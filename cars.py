@@ -138,6 +138,12 @@ def earliest_start_solve(problem):
 def aron_solve(problem):
     '''extension of earliest start solve'''
     sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
+    
+    ###DELETE this once indexedrides are available
+    indexedrides = []
+    for i in range(0,len(problem.rides-1)):
+        indexedrides.append(i,problem.rides[i])
+    ####
     vehicles = []
     assigned_rides = []
     n_vehicles = problem.vehicles
