@@ -96,7 +96,7 @@ def read_problem_statement(problem):
     return Problem(R, C, F, B, T, rides)
 
 def earliest_start_solve(problem):
-    problem = read_problem_statement(problem)
+    '''a really unoptimised strategy for solving the problem'''
     sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
     vehicles = []
     n_vehicles = problem.vehicles
@@ -105,10 +105,12 @@ def earliest_start_solve(problem):
         n_vehicles -= 1
         if n == 0:
             break
-    return write_solution(vehicles)
+    return vehicles
 
-def solve(problem):
-    pass
+def solve(problem, strategy=earliest_start_solve):
+    problem = read_problem_statement(problem)
+    vehicles = strategy(problem)
+    return write_solution(vehicles)
 
 def write_solution(vehicles):
     s = ''
