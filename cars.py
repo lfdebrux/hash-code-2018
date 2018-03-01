@@ -151,6 +151,13 @@ def earliest_start_solve(problem):
 def aron_solve(problem):
     '''extension of earliest start solve'''
     sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
+    
+    ###DELETE this once indexedrides are available
+    indexedrides = []
+    for i in range(0,len(problem.rides-1)):
+        indexedrides.append(i,problem.rides[i])
+    ####
+
     vehicles = []
     assigned_rides = []
     n_vehicles = problem.vehicles
@@ -158,7 +165,7 @@ def aron_solve(problem):
     for i in range(0,problem.N): #itterate for each vehicle
         vehicles.append(sorted_rides[i])
         #ride id, [startx, starty, endx, endy, earlistart, latefinish], journey-length, actual finish
-        ride = problem.rides[i]
+        ride = problem.indexedrides[i]
         journey_length = abs(ride[0]-ride[2])+abs(ride[1]-ride[3])
         actual_start = 
         assigned_rides.append(i,ride,journey_length,)
@@ -190,6 +197,19 @@ def customer_value(rides):
     for ride in rides:
         rides_value.append(abs(ride[0]-ride[2])+abs(ride[1]-ride[3]))
     return rides_value
+
+def ride_possible(rides, current_location, current_time):
+    'this function tests if the ride is possible at all: (current time + time to reach start location + ride duration) < latest finish'
+    rides_possible = []
+    for ride in rides:
+        ride_duration = abs(ride.start[0]-ride.end[0])+abs(ride.start[1]-ride.end[1])
+        duration_to_drive_start = abs(ride.start[0]-current_location[0])+abs(ride.start[1]-current_location[1])
+
+        if current_time+duration_to_drive_start+ride_duration < ride.t_finish:
+            rides_possible.append[1]
+        else:
+            rides_possible.append[0]
+    return rides_possible
 
 if __name__ == '__main__':
     import argparse
