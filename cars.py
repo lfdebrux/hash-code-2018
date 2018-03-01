@@ -45,7 +45,7 @@ class Problem:
         self.indexedrides = rides
 
     def __repr__(self):
-        return f'Problem({self.rows}, {self.cols}, {self.vehicles}, {self.n_rides}, {self.bonus}, {self.steps}, {self.rides})'
+        return f'Problem({self.rows}, {self.cols}, {self.vehicles}, {self.n_rides}, {self.bonus}, {self.steps}, {self.rides}, {self.indexedrides})'
 
 class Ride:
 
