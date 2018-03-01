@@ -26,6 +26,7 @@ This problem uses the Manhattan distance metric a lot
 """
 
 import numpy as np
+import operator
 
 class Problem:
 
@@ -79,6 +80,10 @@ def read_problem_statement(problem):
         rides.append(Ride((a, b), (x, y), s, f))
 
     return Problem(R, C, F, B, T, rides)
+
+def earliest_start_solve(problem):
+    problem = read_problem_statement(problem)
+    sorted_rides = sorted(problem.rides, key=operator.itemgetter('t_start'))
 
 def solve(problem):
     pass
