@@ -91,6 +91,12 @@ class Vehicle:
             self.time = ride.t_start
         self.time += manhattan_distance(ride.start, ride.end)
 
+    def ride_possible(self, ride):
+        if t_start < self.time:
+            return False
+        if self.time + manhattan_distance(ride.start, ride.end) > ride.t_end:
+            return False
+
 def manhattan_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1]-a[1])
 
@@ -178,16 +184,6 @@ def customer_value(rides):
     for ride in rides:
         rides_value.append(abs(ride[0]-ride[2])+abs(ride[1]-ride[3]))
     return rides_value
-
-def ride_possible(rides):
-    'this founction tests if the ride is possible at all, i.e. lenght of the ride is less than assigned time slot'
-    rides_possible = []
-    for ride in rides:
-        if abs(ride[0]-ride[2])+abs(ride[1]-ride[3]) < ride[5]-ride[4]:
-            rides_possible.append[1]
-        else:
-            rides_possible.append[0]
-    return rides_possible
 
 if __name__ == '__main__':
     import argparse
