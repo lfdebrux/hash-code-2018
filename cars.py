@@ -113,12 +113,10 @@ def solve(problem, strategy=earliest_start_solve):
     return write_solution(vehicles)
 
 def write_solution(vehicles):
-   #each row is a vehicle
-   #first column number of rides
-   #each subsequent column is the rides assigned in order of assignment
-   for vehicles:
-       solution.writeline(len(vehicle),vehicle)    
-
+    s = ''
+    for v in vehicles:
+        s += v.print_rides() + '\n'
+    return s
 
 def customer_value(rides):
     'lengt of the ride i.e. score, not using bonus as that is equal for all customers'
