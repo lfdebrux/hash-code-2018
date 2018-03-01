@@ -121,6 +121,8 @@ def earliest_start_solve(problem):
 def solve(problem, strategy=earliest_start_solve):
     problem = read_problem_statement(problem)
     vehicles = strategy(problem)
+    #identify highest value, possible to complete customers
+    #send out initial cars
     return write_solution(vehicles)
 
 def write_solution(vehicles):
