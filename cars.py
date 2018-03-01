@@ -157,9 +157,9 @@ def aron_solve(problem):
     for i in range(0,problem.N): #itterate for each vehicle
         vehicles.append(sorted_rides[i])
         #ride id, [startx, starty, endx, endy, earlistart, latefinish], journey-length, actual finish
-        ride = problem.rides[sorted_rides[i].index] #
-        journey_length = abs(ride[0]-ride[2])+abs(ride[1]-ride[3])
-        actual_start = 
+        ride = problem.rides[sorted_rides[i].index] #select the ride we just appended
+        journey_length = abs(ride.start[0]-ride.end[0])+abs(ride.start[1]-ride.end[1])
+        actual_start = vehicle.time + manhattan_distance(self.location, ride.start) #calculate the time the vehicle gets there
         assigned_rides.append(i,ride,journey_length,)
         n_vehicles -= 1
         if n == 0:
