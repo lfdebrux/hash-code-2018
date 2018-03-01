@@ -118,6 +118,24 @@ def earliest_start_solve(problem):
             break
     return vehicles
 
+def aron_solve(problem):
+    '''extension of earliest start solve'''
+    sorted_rides = sorted(problem.rides, key=operator.attrgetter('t_start'))
+    vehicles = []
+    assigned_rides = []
+    n_vehicles = problem.vehicles
+    for i, n in enumerate(sorted_rides):
+        vehicles.append(Vehicle([i]))
+        assigned_rides.append(i,problem.rides[i])
+        n_vehicles -= 1
+        if n == 0:
+            break
+    #in the order the vehicles finish re-assign them
+    while True:
+        next_available = vehicles
+
+    return vehicles
+
 def solve(problem, strategy=earliest_start_solve):
     problem = read_problem_statement(problem)
     vehicles = strategy(problem)
